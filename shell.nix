@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs ? import <nixpkgs> {} }:
 
 let
   buildInputs = with pkgs; [
@@ -36,4 +36,8 @@ pkgs.mkShell {
   LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath buildInputs}";
 
   # RUST_BACKTRACE = 1;
+ shellHook = ''
+  rustup install nightly
+  rustup default nightly
+  '';
 }
